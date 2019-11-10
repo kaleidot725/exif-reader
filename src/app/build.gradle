@@ -8,7 +8,7 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "kaleidot725.exifreader"
-        minSdkVersion 21
+        minSdkVersion 29
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
