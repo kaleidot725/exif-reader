@@ -4,14 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.exifreader.R
 import kaleidot725.exifreader.databinding.PictureCardBinding
 
-class PictureAdapter(
-    private val owner: LifecycleOwner,
-    private val vms: MutableList<PictureCardViewModel>) :
-    RecyclerView.Adapter<PictureViewHolder>() {
+class PictureAdapter(private val owner: LifecycleOwner) : RecyclerView.Adapter<PictureViewHolder>() {
+    private val vms : MutableList<PictureCardViewModel> = mutableListOf()
 
     fun update(new: List<PictureCardViewModel>) {
         vms.clear()

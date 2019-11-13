@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.exifreader.R
@@ -36,8 +37,10 @@ class HomeFragment : Fragment() {
         binding?.vm = homeViewModel
 
         val recyclerView = this.view?.findViewById<RecyclerView>(R.id.picture_recycler_view)
-        recyclerView?.adapter = PictureAdapter(this, homeViewModel.vms.value?.toMutableList() ?: mutableListOf())
+        val recyclerAdapter = PictureAdapter(this)
+        recyclerView?.adapter = recyclerAdapter
         recyclerView?.layoutManager = GridLayoutManager(context, 3)
         recyclerView?.setHasFixedSize(true)
+        homeViewModel.vms.observe(this, Observer { recyclerAdapter.update(it) })
     }
 }

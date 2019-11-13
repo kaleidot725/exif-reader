@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import kaleidot725.exifreader.R
-import kaleidot725.exifreader.data.appModule
+import kaleidot725.exifreader.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin

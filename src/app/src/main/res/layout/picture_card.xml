@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable name="vm" type="kaleidot725.exifreader.ui.home.PictureCardViewModel" />
     </data>
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.cardview.widget.CardView
+        android:layout_margin="2dp"
+        app:cardCornerRadius="2dp"
         android:background="@android:color/black"
-        android:layout_width="250dp"
-        android:layout_height="250dp">
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
 
         <ImageView
             android:id="@+id/image_view"
+            app:imageUrl="@{vm.src}"
+            android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
     </androidx.cardview.widget.CardView>
 </layout>

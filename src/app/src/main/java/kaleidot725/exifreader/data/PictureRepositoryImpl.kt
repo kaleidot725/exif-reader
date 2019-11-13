@@ -20,30 +20,28 @@ class PictureRepositoryImpl(private val context : Context) : PictureRepository {
     }
 
     private fun update(): List<Picture> {
-        val externalUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         val list = ArrayList<Picture>()
 
         try {
             val cursor = context.contentResolver.query(
-                externalUri,
-                arrayOf(MediaStore.MediaColumns._ID,  MediaStore.MediaColumns.DATE_MODIFIED),
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                arrayOf(MediaStore.MediaColumns.DATA),
                 null,
                 null,
-                "${MediaStore.MediaColumns.DATE_MODIFIED} DESC"
+                "${MediaStore.MediaColumns.DATA} DESC"
             )
 
             if(cursor != null) {
                 while (cursor.moveToNext()) {
-                    val id = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns._ID))
-                    val uri = ContentUris.withAppendedId(externalUri, id.toLong())
-                    list.add(Picture(uri.path, uri.path))
+                    val idx = cursor.getColumnIndex(MediaStore.MediaColumns.DATA)
+                    val uri = cursor.getString(idx)
+                    list.add(Picture(uri, uri))
                 }
             }
         }
         catch (e : Exception) {
             Log.v("TEST", e.toString(), e)
         }
-
 
         return list.sortedWith(compareBy { it.name })
     }
