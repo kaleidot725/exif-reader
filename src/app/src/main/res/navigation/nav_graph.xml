@@ -12,12 +12,14 @@
         tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_homeFragment_to_viewerFragment"
-            app:destination="@id/viewerFragment" />
+            app:destination="@id/viewerFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
         android:id="@+id/viewerFragment"
         android:name="kaleidot725.exifreader.ui.viewer.ViewerFragment"
+
         android:label="Exif Viewer"
         tools:layout="@layout/viewer_fragment">
         <argument

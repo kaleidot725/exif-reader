@@ -34,9 +34,11 @@ class MainActivity : AppCompatActivity() , EasyPermissions.PermissionCallbacks {
             androidLogger()
             androidContext(applicationContext)
             modules(appModule)
-            findNavController(R.id.nav_host_fragment).navigateUp()
         }
     }
+
+    override fun onSupportNavigateUp(): Boolean = findNavController(R.id.nav_host_fragment).navigateUp()
+
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
