@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.exifreader.R
@@ -31,6 +33,14 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        homeViewModel.load { id, src ->
+            when(id) {
+                R.id.action_homeFragment_to_viewerFragment -> {
+                    val action = HomeFragmentDirections.actionHomeFragmentToViewerFragment(src)
+                    view.findNavController().navigate(action)
+                }
+            }
+        }
 
         val binding = DataBindingUtil.bind<HomeFragmentBinding>(this.view as View)
         binding?.lifecycleOwner = this

@@ -12,6 +12,7 @@
         app:cardCornerRadius="2dp"
         android:background="@android:color/black"
         android:layout_width="match_parent"
+        android:onClick="@{vm::preview}"
         android:layout_height="150dp">
 
         <ImageView

@@ -14,6 +14,7 @@
             android:id="@+id/action_homeFragment_to_viewerFragment"
             app:destination="@id/viewerFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/viewerFragment"
         android:name="kaleidot725.exifreader.ui.viewer.ViewerFragment"

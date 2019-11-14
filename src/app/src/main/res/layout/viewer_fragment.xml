@@ -8,7 +8,7 @@
     tools:context=".ui.viewer.ViewerFragment">
 
     <TextView
-        android:id="@+id/message"
+        android:id="@+id/message_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ViewerFragment"
