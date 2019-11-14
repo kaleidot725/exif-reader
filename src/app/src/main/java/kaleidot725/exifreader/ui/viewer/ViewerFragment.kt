@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.exifreader.R
+import kaleidot725.exifreader.databinding.HomeFragmentBinding
+import kaleidot725.exifreader.databinding.ViewerFragmentBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ViewerFragment : Fragment() {
@@ -32,8 +35,10 @@ class ViewerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val path = ViewerFragmentArgs.fromBundle(arguments as Bundle).path
-        val msg = view.findViewById<TextView>(R.id.message_text)
+        viewerViewModel.load(path)
 
-        msg.text = path
+        val binding = DataBindingUtil.bind<ViewerFragmentBinding>(this.view as View)
+        binding?.lifecycleOwner = this
+        binding?.vm = viewerViewModel
     }
 }

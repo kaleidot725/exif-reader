@@ -6,18 +6,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kaleidot725.exifreader.R
 
-class PictureCardViewModel(
-    private val srcPath: String,
-    private val navigate: (Int, String) -> Unit) : ViewModel() {
+class PictureCardViewModel: ViewModel() {
 
+    private var _navigate: ((Int, String) -> Unit)? = null
     private val _src : MutableLiveData<String> = MutableLiveData()
     val src : LiveData<String> = _src
 
-    init {
-        _src.value = srcPath
+    fun load(path: String, navigate : (Int, String) -> Unit) {
+        _src.value = path
+        _navigate = navigate
     }
 
     fun preview(view : View) {
-        navigate(R.id.action_homeFragment_to_viewerFragment,srcPath)
+        _navigate?.invoke(R.id.action_homeFragment_to_viewerFragment, _src.value ?: "")
     }
 }

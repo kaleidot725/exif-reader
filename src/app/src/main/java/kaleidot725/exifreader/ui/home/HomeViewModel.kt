@@ -15,8 +15,7 @@ class HomeViewModel(val repo : PictureRepository) : ViewModel() {
     fun load(navigate: (Int, String) -> Unit) {
         viewModelScope.launch {
             val list = mutableListOf<PictureCardViewModel>()
-            val all = repo.all()
-            all.forEach { list.add(PictureCardViewModel(it.path, navigate)) }
+            repo.all().forEach { list.add(PictureCardViewModel().apply { load(it.path, navigate) }) }
             _vms.postValue(list)
         }
     }
