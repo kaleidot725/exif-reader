@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right|bottom"
             android:src="@drawable/details"
+            android:onClick="@{vm::displayMetadata}"
             android:layout_margin="16dp"/>
     </FrameLayout>
 </layout>

@@ -11,9 +11,12 @@ import java.lang.Exception
 class PictureRepositoryImpl(private val context : Context) : PictureRepository {
 
     override fun all(): List<Picture> {
-        return update().reversed()
+        return update()
     }
 
+    override fun get(path: String): Picture? {
+        return update().firstOrNull {it.path == path}
+    }
     override fun count(): Int {
         val list = update()
         return list.count()

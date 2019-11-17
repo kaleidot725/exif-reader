@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kaleidot725.exifreader.R
 
-class PictureCardViewModel: ViewModel() {
+class PictureItemViewModel: ViewModel() {
 
     private var _navigate: ((Int, String) -> Unit)? = null
     private val _src : MutableLiveData<String> = MutableLiveData()

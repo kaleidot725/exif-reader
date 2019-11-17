@@ -13,6 +13,10 @@
         <action
             android:id="@+id/action_homeFragment_to_viewerFragment"
             app:destination="@id/viewerFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpToInclusive="false" />
     </fragment>
 
@@ -20,8 +24,24 @@
         android:id="@+id/viewerFragment"
         android:name="kaleidot725.exifreader.ui.viewer.ViewerFragment"
 
-        android:label="Exif Viewer"
+        android:label="Preview"
         tools:layout="@layout/viewer_fragment">
+        <argument
+            android:name="path"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_viewerFragment_to_metadataFragment"
+            app:destination="@id/metadataFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/metadataFragment"
+        android:name="kaleidot725.exifreader.ui.metadata.MetadataFragment"
+        android:label="MetadataFragment" >
         <argument
             android:name="path"
             app:argType="string" />

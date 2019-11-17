@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="vm" type="kaleidot725.exifreader.ui.home.PictureCardViewModel" />
+        <variable name="vm" type="kaleidot725.exifreader.ui.home.PictureItemViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView

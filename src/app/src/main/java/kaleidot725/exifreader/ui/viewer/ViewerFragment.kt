@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.exifreader.R
@@ -27,7 +28,6 @@ class ViewerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         return inflater.inflate(R.layout.viewer_fragment, container, false)
     }
 
@@ -35,7 +35,14 @@ class ViewerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val path = ViewerFragmentArgs.fromBundle(arguments as Bundle).path
-        viewerViewModel.load(path)
+        viewerViewModel.load(path) { id, src ->
+            when(id) {
+                R.id.action_viewerFragment_to_metadataFragment -> {
+                    val action = ViewerFragmentDirections.actionViewerFragmentToMetadataFragment(src)
+                    view.findNavController().navigate(action)
+                }
+            }
+        }
 
         val binding = DataBindingUtil.bind<ViewerFragmentBinding>(this.view as View)
         binding?.lifecycleOwner = this
