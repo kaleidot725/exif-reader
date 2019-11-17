@@ -41,7 +41,7 @@
     <fragment
         android:id="@+id/metadataFragment"
         android:name="kaleidot725.exifreader.ui.metadata.MetadataFragment"
-        android:label="MetadataFragment" >
+        android:label="Metadata">
         <argument
             android:name="path"
             app:argType="string" />
