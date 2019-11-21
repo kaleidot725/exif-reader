@@ -12,7 +12,7 @@ import org.koin.dsl.module
 val appModule = module {
 
     single {
-        PictureRepositoryImpl(androidContext()) as PictureRepository
+        (PictureRepositoryImpl(androidContext()) as PictureRepository).apply { load() }
     }
 
     viewModel {

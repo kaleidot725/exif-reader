@@ -9,16 +9,21 @@ import java.io.File
 import java.lang.Exception
 
 class PictureRepositoryImpl(private val context : Context) : PictureRepository {
+    private val list : MutableList<Picture> = mutableListOf()
+
+    override fun load() {
+        list.addAll(update())
+    }
 
     override fun all(): List<Picture> {
-        return update()
+        return list.toList()
     }
 
     override fun get(path: String): Picture? {
-        return update().firstOrNull {it.path == path}
+        return list.firstOrNull {it.path == path}
     }
+
     override fun count(): Int {
-        val list = update()
         return list.count()
     }
 
