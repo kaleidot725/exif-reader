@@ -1,11 +1,16 @@
 package kaleidot725.exifreader.ui
 
 import android.Manifest
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import com.mikepenz.aboutlibraries.Libs
+import com.mikepenz.aboutlibraries.LibsBuilder
 import kaleidot725.exifreader.R
 import kaleidot725.exifreader.appModule
 import org.koin.android.ext.koin.androidContext
@@ -37,8 +42,30 @@ class MainActivity : AppCompatActivity() , EasyPermissions.PermissionCallbacks {
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean = findNavController(R.id.nav_host_fragment).navigateUp()
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            R.id.privacy_policy -> {
+                val intent = Intent(this, PrivacyPolicyActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.license -> {
+                LibsBuilder()
+                    .withActivityTitle("License")
+                    .withShowLoadingProgress(false)
+                    .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR).start(this)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onSupportNavigateUp(): Boolean = findNavController(R.id.nav_host_fragment).navigateUp()
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)

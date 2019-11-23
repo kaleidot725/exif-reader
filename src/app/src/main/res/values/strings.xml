@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Exif Reader</string>
+    <string name="privacy_policy_url">https://gist.githubusercontent.com/kaleidot725/1b23a32a6dc9196f48f9fa213a3099cb/raw/93a5f99886bdf8544a4ec415229206b15976bf68/exif-reader-privacy-policy.txt</string>
 </resources>
