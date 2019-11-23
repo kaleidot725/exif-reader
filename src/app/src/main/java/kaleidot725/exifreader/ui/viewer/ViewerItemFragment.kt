@@ -2,6 +2,8 @@ package kaleidot725.exifreader.ui.viewer
 
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +13,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kaleidot725.exifreader.R
+import kaleidot725.exifreader.data.Picture
 import kaleidot725.exifreader.data.PictureRepository
 import kaleidot725.exifreader.databinding.ViewerFragmentBinding
+import kaleidot725.exifreader.databinding.ViewerItemFragmentBinding
 import kaleidot725.exifreader.loadImage
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -28,7 +32,7 @@ class ViewerItemFragment : Fragment() {
         }
     }
 
-    val pictureRepository : PictureRepository by inject()
+    val viewerItemViewModel: ViewerItemViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,10 +43,11 @@ class ViewerItemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val binding = DataBindingUtil.bind<ViewerItemFragmentBinding>(this.view as View)
+        binding?.lifecycleOwner = this
+        binding?.vm = viewerItemViewModel
 
         val position = arguments?.getInt("position") ?: 0
-        val picture = pictureRepository.all()[position]
-        val imageView = view.findViewById<ImageView>(R.id.image_view)
-        loadImage(imageView, picture.path)
+        viewerItemViewModel.load(position)
     }
 }

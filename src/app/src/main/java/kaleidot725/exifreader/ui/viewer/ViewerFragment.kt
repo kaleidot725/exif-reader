@@ -7,8 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.navigation.findNavController
+import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kaleidot725.exifreader.R
 import kaleidot725.exifreader.databinding.ViewerFragmentBinding
@@ -34,23 +38,23 @@ class ViewerFragment : Fragment() {
         val path = ViewerFragmentArgs.fromBundle(arguments as Bundle).path
         viewerViewModel.update(path)
 
-        val viewPager = view.findViewById<ViewPager>(R.id.viewpager)
-        viewPager.adapter = object : FragmentPagerAdapter(activity!!.supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-            override fun getCount(): Int {
+        val viewPager = view.findViewById<ViewPager2>(R.id.viewpager)
+        viewPager.adapter = object : FragmentStateAdapter(this) {
+            override fun getItemCount(): Int {
                 return viewerViewModel.getCount()
             }
 
-            override fun getItem(position: Int): Fragment {
+            override fun createFragment(position: Int): Fragment {
                 return ViewerItemFragment.newInstance(position)
             }
         }
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
-            override fun onPageScrollStateChanged(state: Int) {}
-            override fun onPageSelected(position: Int) {}
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
                 viewerViewModel.update(position)
             }
         })
+
         viewPager.currentItem = viewerViewModel.getCurrentPicturePosition()
 
         val floatingButton = view.findViewById<FloatingActionButton>(R.id.floating_button)
