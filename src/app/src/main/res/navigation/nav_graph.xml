@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="kaleidot725.exifreader.ui.home.HomeFragment"
-        android:label="Exif Viewer"
+        android:label="Exif Reader"
         tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_homeFragment_to_viewerFragment"
