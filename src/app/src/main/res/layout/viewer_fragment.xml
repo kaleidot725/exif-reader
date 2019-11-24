@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <data>
-        <variable name="vm" type="kaleidot725.exifreader.ui.viewer.ViewerViewModel" />
+
+        <variable
+            name="vm"
+            type="kaleidot725.exifreader.ui.viewer.ViewerViewModel" />
     </data>
 
-    <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:background="@android:color/black"
@@ -16,7 +19,7 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floating_button"
@@ -24,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right|bottom"
             android:src="@drawable/details"
-            android:layout_margin="16dp"/>
+            android:layout_margin="16dp" />
     </FrameLayout>
 </layout>
 

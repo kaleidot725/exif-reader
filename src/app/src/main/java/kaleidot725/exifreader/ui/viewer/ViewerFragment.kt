@@ -50,8 +50,7 @@ class ViewerFragment : Fragment() {
                 viewerViewModel.update(position)
             }
         })
-
-        viewPager.currentItem = viewerViewModel.getCurrentPicturePosition()
+        viewPager.setCurrentItem(viewerViewModel.getCurrentPicturePosition(), false)
 
         val floatingButton = view.findViewById<FloatingActionButton>(R.id.floating_button)
         floatingButton.setOnClickListener {
