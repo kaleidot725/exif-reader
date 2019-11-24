@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
-        <variable name="vm" type="kaleidot725.exifreader.ui.viewer.ViewerItemViewModel" />
+
+        <variable
+            name="vm"
+            type="kaleidot725.exifreader.ui.viewer.ViewerItemViewModel" />
     </data>
 
-    <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:background="@android:color/black"
@@ -17,7 +20,8 @@
             android:id="@+id/image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:imageUrl="@{vm.src}"/>
+            app:imageUrl="@{vm.src}"
+            app:imageLoader="@{vm.loader}" />
     </FrameLayout>
 </layout>
 

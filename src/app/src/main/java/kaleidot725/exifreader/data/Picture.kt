@@ -3,9 +3,9 @@ package kaleidot725.exifreader.data
 import android.media.ExifInterface
 
 data class Picture(val path: String, val name: String) {
-
+    
     companion object {
-        private val metadataSets : List<Metadata> = listOf(
+        private val metadataSets: List<Metadata> = listOf(
             Metadata(ExifInterface.TAG_APERTURE_VALUE, "APERTUERE VALUE", ""),
             Metadata(ExifInterface.TAG_ARTIST, "ARTIST", ""),
             Metadata(ExifInterface.TAG_BITS_PER_SAMPLE, "BITS PER SAMPLE", ""),
@@ -22,7 +22,11 @@ data class Picture(val path: String, val name: String) {
             Metadata(ExifInterface.TAG_DATETIME_DIGITIZED, "DATETIME DIGITIZED", ""),
             Metadata(ExifInterface.TAG_DATETIME_ORIGINAL, "DATETIME ORIGINAL", ""),
             Metadata(ExifInterface.TAG_DEFAULT_CROP_SIZE, "DEFAULT CROP SIZE", ""),
-            Metadata(ExifInterface.TAG_DEVICE_SETTING_DESCRIPTION, "DEVICE SETTING DESCRIPTION", ""),
+            Metadata(
+                ExifInterface.TAG_DEVICE_SETTING_DESCRIPTION,
+                "DEVICE SETTING DESCRIPTION",
+                ""
+            ),
             Metadata(ExifInterface.TAG_DIGITAL_ZOOM_RATIO, "DIGITIAL ZOOM RATIO", ""),
             Metadata(ExifInterface.TAG_DNG_VERSION, "DNG VERSION", ""),
             Metadata(ExifInterface.TAG_EXIF_VERSION, "EXIF VERSION", ""),
@@ -37,7 +41,11 @@ data class Picture(val path: String, val name: String) {
             Metadata(ExifInterface.TAG_FLASH_ENERGY, "FLASH ENERGY", ""),
             Metadata(ExifInterface.TAG_FOCAL_LENGTH, "FOCAL LENGTH", ""),
             Metadata(ExifInterface.TAG_FOCAL_LENGTH_IN_35MM_FILM, "FOCAL LENGTH IN 35MM FILM", ""),
-            Metadata(ExifInterface.TAG_FOCAL_PLANE_RESOLUTION_UNIT, "FOCAL PLANE RESOLUTION UNIT", ""),
+            Metadata(
+                ExifInterface.TAG_FOCAL_PLANE_RESOLUTION_UNIT,
+                "FOCAL PLANE RESOLUTION UNIT",
+                ""
+            ),
             Metadata(ExifInterface.TAG_FOCAL_PLANE_X_RESOLUTION, "FOCAL PLANE X RESOLUTION", ""),
             Metadata(ExifInterface.TAG_FOCAL_PLANE_Y_RESOLUTION, "FOCAL PLANE Y RESOLUTION", ""),
             Metadata(ExifInterface.TAG_F_NUMBER, "F NUMBER", ""),
@@ -79,7 +87,11 @@ data class Picture(val path: String, val name: String) {
             Metadata(ExifInterface.TAG_INTEROPERABILITY_INDEX, "INTEROPERABILITY INDEX", ""),
             Metadata(ExifInterface.TAG_ISO_SPEED_RATINGS, "ISO SPEED RATINGS", ""),
             Metadata(ExifInterface.TAG_JPEG_INTERCHANGE_FORMAT, "JPEG INTERCHANGE FORMAT", ""),
-            Metadata(ExifInterface.TAG_JPEG_INTERCHANGE_FORMAT_LENGTH, "JPEG INTERCHANGE FORMAT LENGTH", ""),
+            Metadata(
+                ExifInterface.TAG_JPEG_INTERCHANGE_FORMAT_LENGTH,
+                "JPEG INTERCHANGE FORMAT LENGTH",
+                ""
+            ),
             Metadata(ExifInterface.TAG_LIGHT_SOURCE, "LIGHT SOURCE", ""),
             Metadata(ExifInterface.TAG_MAKE, "MAKE", ""),
             Metadata(ExifInterface.TAG_MAKER_NOTE, "MAKER NOTE", ""),
@@ -93,7 +105,11 @@ data class Picture(val path: String, val name: String) {
             Metadata(ExifInterface.TAG_ORF_PREVIEW_IMAGE_START, "ORF PREVIEW IMAGE START", ""),
             Metadata(ExifInterface.TAG_ORF_THUMBNAIL_IMAGE, "ORF THUMBNAIL IMAGE", ""),
             Metadata(ExifInterface.TAG_ORIENTATION, "ORIENTATION", ""),
-            Metadata(ExifInterface.TAG_PHOTOMETRIC_INTERPRETATION, "PHOTOMETRIC INTERPRETATION", ""),
+            Metadata(
+                ExifInterface.TAG_PHOTOMETRIC_INTERPRETATION,
+                "PHOTOMETRIC INTERPRETATION",
+                ""
+            ),
             Metadata(ExifInterface.TAG_PIXEL_X_DIMENSION, "PIXEL X DIMENSION", ""),
             Metadata(ExifInterface.TAG_PIXEL_Y_DIMENSION, "PIXEL Y DIMENSION", ""),
             Metadata(ExifInterface.TAG_PLANAR_CONFIGURATION, "PLANAR CONFIGURATION", ""),
@@ -116,7 +132,11 @@ data class Picture(val path: String, val name: String) {
             Metadata(ExifInterface.TAG_SHARPNESS, "SHARPNESS", ""),
             Metadata(ExifInterface.TAG_SHUTTER_SPEED_VALUE, "SHUTTER SPEED VALUE", ""),
             Metadata(ExifInterface.TAG_SOFTWARE, "SOFTWARE", ""),
-            Metadata(ExifInterface.TAG_SPATIAL_FREQUENCY_RESPONSE, "SPATIAL FREQUENCY RESPONSE", ""),
+            Metadata(
+                ExifInterface.TAG_SPATIAL_FREQUENCY_RESPONSE,
+                "SPATIAL FREQUENCY RESPONSE",
+                ""
+            ),
             Metadata(ExifInterface.TAG_SPECTRAL_SENSITIVITY, "SPECTRAL SENSITIVITY", ""),
             Metadata(ExifInterface.TAG_STRIP_BYTE_COUNTS, "STRIP BYTE COUNTS", ""),
             Metadata(ExifInterface.TAG_STRIP_OFFSETS, "STRIP OFFSETS", ""),
@@ -142,7 +162,7 @@ data class Picture(val path: String, val name: String) {
         )
     }
 
-    fun getMetadata() : List<Metadata>{
+    fun getMetadata(): List<Metadata> {
         val exifInterface = ExifInterface(path)
         return mutableListOf<Metadata>().also { list ->
             metadataSets.forEach { metadata ->

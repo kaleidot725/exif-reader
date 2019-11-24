@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.exifreader.R
 import kaleidot725.exifreader.databinding.PictureItemViewBinding
 
-class PictureAdapter(private val owner: LifecycleOwner) : RecyclerView.Adapter<PictureViewHolder>() {
-    private val vms : MutableList<PictureItemViewModel> = mutableListOf()
+class PictureAdapter(private val owner: LifecycleOwner) :
+    RecyclerView.Adapter<PictureViewHolder>() {
+    private val vms: MutableList<PictureItemViewModel> = mutableListOf()
 
     fun update(new: List<PictureItemViewModel>) {
         vms.clear()
@@ -20,7 +21,12 @@ class PictureAdapter(private val owner: LifecycleOwner) : RecyclerView.Adapter<P
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PictureViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding =
-            DataBindingUtil.inflate<PictureItemViewBinding>(inflater, R.layout.picture_item_view, parent, false)
+            DataBindingUtil.inflate<PictureItemViewBinding>(
+                inflater,
+                R.layout.picture_item_view,
+                parent,
+                false
+            )
         return PictureViewHolder(owner, binding.root, binding)
     }
 

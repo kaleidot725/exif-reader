@@ -1,16 +1,12 @@
 package kaleidot725.exifreader.data
 
-import android.content.ContentUris
 import android.content.Context
-import android.content.Intent
 import android.provider.MediaStore
 import android.util.Log
-import java.io.File
-import java.lang.Exception
 
-class PictureRepositoryImpl(private val context : Context) : PictureRepository {
-    private val list : MutableList<Picture> = mutableListOf()
-
+class PictureRepositoryImpl(private val context: Context) : PictureRepository {
+    private val list: MutableList<Picture> = mutableListOf()
+    
     override fun load() {
         list.addAll(update())
     }
@@ -20,7 +16,7 @@ class PictureRepositoryImpl(private val context : Context) : PictureRepository {
     }
 
     override fun get(path: String): Picture? {
-        return list.firstOrNull {it.path == path}
+        return list.firstOrNull { it.path == path }
     }
 
     override fun count(): Int {
@@ -39,15 +35,14 @@ class PictureRepositoryImpl(private val context : Context) : PictureRepository {
                 "${MediaStore.MediaColumns.DATA} DESC"
             )
 
-            if(cursor != null) {
+            if (cursor != null) {
                 while (cursor.moveToNext()) {
                     val idx = cursor.getColumnIndex(MediaStore.MediaColumns.DATA)
                     val uri = cursor.getString(idx)
                     list.add(Picture(uri, uri))
                 }
             }
-        }
-        catch (e : Exception) {
+        } catch (e: Exception) {
             Log.v("TEST", e.toString(), e)
         }
 

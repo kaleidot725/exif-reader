@@ -1,5 +1,6 @@
 package kaleidot725.exifreader
 
+import coil.ImageLoader
 import kaleidot725.exifreader.data.PictureRepository
 import kaleidot725.exifreader.data.PictureRepositoryImpl
 import kaleidot725.exifreader.ui.home.HomeViewModel
@@ -16,11 +17,17 @@ val appModule = module {
         (PictureRepositoryImpl(androidContext()) as PictureRepository).apply { load() }
     }
 
+    single {
+        ImageLoader(androidContext()) {
+            crossfade(10)
+        }
+    }
+
     viewModel {
-        HomeViewModel(get())
+        HomeViewModel(get(), get())
     }
     viewModel {
-        ViewerItemViewModel(get())
+        ViewerItemViewModel(get(), get())
     }
     viewModel {
         ViewerViewModel(get())

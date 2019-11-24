@@ -1,16 +1,12 @@
 package kaleidot725.exifreader.ui.viewer
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -19,7 +15,7 @@ import kaleidot725.exifreader.databinding.ViewerFragmentBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ViewerFragment : Fragment() {
-    val viewerViewModel : ViewerViewModel by viewModel()
+    val viewerViewModel: ViewerViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,7 +56,8 @@ class ViewerFragment : Fragment() {
         val floatingButton = view.findViewById<FloatingActionButton>(R.id.floating_button)
         floatingButton.setOnClickListener {
             val picture = viewerViewModel.getCurrentPicture()
-            val action = ViewerFragmentDirections.actionViewerFragmentToMetadataFragment(picture.path)
+            val action =
+                ViewerFragmentDirections.actionViewerFragmentToMetadataFragment(picture.path)
             view.findNavController().navigate(action)
         }
     }

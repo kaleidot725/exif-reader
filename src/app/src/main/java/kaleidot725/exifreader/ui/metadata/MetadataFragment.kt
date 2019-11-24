@@ -14,11 +14,6 @@ import kaleidot725.exifreader.databinding.MetadataFragmentBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MetadataFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = MetadataFragment()
-    }
-
     val metadataViewModel : MetadataViewModel by viewModel()
 
     override fun onCreateView(
