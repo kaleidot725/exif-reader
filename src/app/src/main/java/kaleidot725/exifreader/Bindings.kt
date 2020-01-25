@@ -3,16 +3,14 @@ package kaleidot725.exifreader
 import android.net.Uri
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import coil.ImageLoader
 import coil.api.load
 import java.io.File
 
-@BindingAdapter("app:imageUrl", "app:imageLoader")
-fun loadImage(view: ImageView, imagePath: String?, imageLoader: ImageLoader) {
+@BindingAdapter("app:imageUrl")
+fun loadImage(view: ImageView, imagePath: String?) {
     if (imagePath == null) {
         return
     }
 
-    val test = Uri.fromFile(File(imagePath))
-    view.load(Uri.fromFile(File(imagePath)), imageLoader)
+    view.load(Uri.fromFile(File(imagePath)))
 }

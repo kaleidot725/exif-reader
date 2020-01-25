@@ -45,8 +45,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
                 crossfade(10)
             })
         }
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
