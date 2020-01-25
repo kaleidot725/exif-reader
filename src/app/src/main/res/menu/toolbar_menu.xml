@@ -2,9 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/privacy_policy"
-        android:title="Privacy Policy"/>
+        android:title="Privacy Policy"
+        android:icon="@drawable/ic_shield_account" />
 
     <item
         android:id="@+id/license"
-        android:title="License"/>
+        android:title="License"
+        android:icon="@drawable/ic_format_list_text" />
 </menu>

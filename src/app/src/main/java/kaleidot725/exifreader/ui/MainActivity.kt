@@ -1,7 +1,6 @@
 package kaleidot725.exifreader.ui
 
 import android.Manifest
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -55,8 +54,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.privacy_policy -> {
-                val intent = Intent(this, PrivacyPolicyActivity::class.java)
-                startActivity(intent)
+                navController.navigate(R.id.action_homeFragment_to_privacyPolicyFragment)
                 return true
             }
             R.id.license -> {
