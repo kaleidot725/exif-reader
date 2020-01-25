@@ -21,7 +21,7 @@ class PictureAdapter(private val owner: LifecycleOwner) : RecyclerView.Adapter<P
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PictureViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.picture_item_view, parent, false)
-        return PictureViewHolder(view, owner)
+        return PictureViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: PictureViewHolder, position: Int) {

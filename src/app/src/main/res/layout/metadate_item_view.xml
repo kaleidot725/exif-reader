@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
-    <data>
-        <variable name="vm" type="kaleidot725.exifreader.ui.metadata.MetadataItemViewModel" />
-    </data>
 
-    <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <data />
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:background="#555555"
         android:layout_width="match_parent"
@@ -27,8 +25,7 @@
                 android:layout_margin="5dp"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:textSize="20dp"
-                android:text="@{vm.name}"/>
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/value_text_view"
@@ -36,8 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:textColor="@android:color/white"
-                android:textSize="16dp"
-                android:text="@{vm.value}"/>
+                android:textSize="16dp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
