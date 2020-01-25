@@ -28,7 +28,12 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
         val permission = Manifest.permission.READ_EXTERNAL_STORAGE
         if (!EasyPermissions.hasPermissions(this, permission)) {
-            EasyPermissions.requestPermissions(this, "このアプリケーションは外部ストレージにアクセスします。よろしいですか？", 0, permission)
+            EasyPermissions.requestPermissions(
+                this,
+                "This Application Access External Storage. Are you OK",
+                0,
+                permission
+            )
             return
         }
 
