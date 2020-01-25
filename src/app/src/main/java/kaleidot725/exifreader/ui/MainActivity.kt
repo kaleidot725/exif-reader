@@ -4,8 +4,10 @@ import android.Manifest
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import coil.Coil
@@ -20,8 +22,8 @@ import org.koin.core.context.startKoin
 import pub.devrel.easypermissions.EasyPermissions
 
 class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
-
     private lateinit var navController: NavController
+    private var menuItem: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
         setContentView(R.layout.activity_main)
         navController = findNavController(R.id.nav_host_fragment)
+        navController.addOnDestinationChangedListener(destinationChangedListener)
         setupActionBarWithNavController(this, navController)
 
         startKoin {
@@ -52,7 +55,10 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        if (navController.currentDestination?.id == R.id.homeFragment) {
+            menuInflater.inflate(R.menu.toolbar_menu, menu)
+        }
+
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -60,17 +66,22 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         when (item?.itemId) {
             R.id.privacy_policy -> {
                 navController.navigate(R.id.action_homeFragment_to_privacyPolicyFragment)
-                return true
             }
             R.id.license -> {
                 LibsBuilder()
                     .withActivityTitle("License")
                     .withShowLoadingProgress(false)
                     .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR).start(this)
-                return true
             }
         }
+
         return super.onOptionsItemSelected(item)
+    }
+
+    private val destinationChangedListener = object : NavController.OnDestinationChangedListener {
+        override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
+            invalidateOptionsMenu()
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean = findNavController(R.id.nav_host_fragment).navigateUp()
