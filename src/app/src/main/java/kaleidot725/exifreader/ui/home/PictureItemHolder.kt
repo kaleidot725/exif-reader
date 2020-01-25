@@ -1,20 +1,19 @@
 package kaleidot725.exifreader.ui.home
 
+import android.net.Uri
 import android.view.View
+import android.widget.ImageView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
-import kaleidot725.exifreader.databinding.PictureItemViewBinding
+import coil.api.load
+import kaleidot725.exifreader.R
+import kaleidot725.exifreader.data.Picture
+import java.io.File
 
-class PictureViewHolder(
-    private val owner: LifecycleOwner,
-    private val itemView: View,
-    private val binding: PictureItemViewBinding
-) :
-    RecyclerView.ViewHolder(itemView) {
+class PictureViewHolder(view: View, private val owner: LifecycleOwner) : RecyclerView.ViewHolder(view) {
+    val imageView = view.findViewById<ImageView>(R.id.image_view)
 
-    fun bind(vm: PictureItemViewModel?) {
-        binding.vm = vm
-        binding.executePendingBindings()
-        binding.lifecycleOwner = owner
+    fun bind(picture: Picture) {
+        imageView.load(Uri.fromFile(File(picture.path)))
     }
 }

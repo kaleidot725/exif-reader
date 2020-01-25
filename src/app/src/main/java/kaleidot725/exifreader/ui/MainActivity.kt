@@ -2,13 +2,15 @@ package kaleidot725.exifreader.ui
 
 import android.Manifest
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import coil.Coil
+import coil.ImageLoader
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
 import kaleidot725.exifreader.R
@@ -18,9 +20,9 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import pub.devrel.easypermissions.EasyPermissions
 
-class MainActivity : AppCompatActivity() , EasyPermissions.PermissionCallbacks {
+class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
-    private lateinit var navController : NavController
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,11 +37,16 @@ class MainActivity : AppCompatActivity() , EasyPermissions.PermissionCallbacks {
         navController = findNavController(R.id.nav_host_fragment)
         setupActionBarWithNavController(this, navController)
 
-        startKoin{
+        startKoin {
             androidLogger()
             androidContext(applicationContext)
             modules(appModule)
+            Coil.setDefaultImageLoader(ImageLoader(applicationContext) {
+                crossfade(10)
+            })
         }
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -48,7 +55,7 @@ class MainActivity : AppCompatActivity() , EasyPermissions.PermissionCallbacks {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId) {
+        when (item?.itemId) {
             R.id.privacy_policy -> {
                 val intent = Intent(this, PrivacyPolicyActivity::class.java)
                 startActivity(intent)

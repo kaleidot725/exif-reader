@@ -13,5 +13,6 @@ fun loadImage(view: ImageView, imagePath: String?, imageLoader: ImageLoader) {
         return
     }
 
+    val test = Uri.fromFile(File(imagePath))
     view.load(Uri.fromFile(File(imagePath)), imageLoader)
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coil.ImageLoader
+import kaleidot725.exifreader.data.Picture
 import kaleidot725.exifreader.repository.PictureRepository
 import kotlinx.coroutines.launch
 
@@ -13,14 +14,12 @@ class HomeViewModel(
     private val imageLoader: ImageLoader
 ) : ViewModel() {
 
-    private val _vms: MutableLiveData<List<PictureItemViewModel>> = MutableLiveData()
-    val vms: LiveData<List<PictureItemViewModel>> = _vms
+    private val _pictures: MutableLiveData<List<Picture>> = MutableLiveData()
+    val pictures: LiveData<List<Picture>> = _pictures
 
-    fun load(navigate: (Int, String) -> Unit) {
+    fun getAllPictures() {
         viewModelScope.launch {
-            val newVms = repository.all()
-                .map { p -> PictureItemViewModel(imageLoader).apply { load(p.path, navigate) } }
-            _vms.postValue(newVms)
+            _pictures.postValue(repository.all())
         }
     }
 }
