@@ -11,21 +11,9 @@ import kaleidot725.exifreader.databinding.ViewerItemFragmentBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ViewerItemFragment : Fragment() {
+    private val viewerItemViewModel: ViewerItemViewModel by viewModel()
 
-    companion object {
-        fun newInstance(position: Int) = ViewerItemFragment().also {
-            val bundle = Bundle()
-            bundle.putInt("position", position)
-            it.arguments = bundle
-        }
-    }
-
-    val viewerItemViewModel: ViewerItemViewModel by viewModel()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.viewer_item_fragment, container, false)
     }
 
@@ -36,6 +24,14 @@ class ViewerItemFragment : Fragment() {
         binding?.vm = viewerItemViewModel
 
         val position = arguments?.getInt("position") ?: 0
-        viewerItemViewModel.load(position)
+        viewerItemViewModel.updatePosition(position)
+    }
+
+    companion object {
+        fun newInstance(position: Int) = ViewerItemFragment().also {
+            val bundle = Bundle()
+            bundle.putInt("position", position)
+            it.arguments = bundle
+        }
     }
 }

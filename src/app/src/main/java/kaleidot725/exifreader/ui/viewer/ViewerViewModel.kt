@@ -10,11 +10,11 @@ class ViewerViewModel(private val repository: PictureRepository) : ViewModel() {
     fun getCurrentPicture(): Picture = picture
     fun getCurrentPicturePosition(): Int = repository.all().indexOf(picture)
 
-    fun update(position: Int) {
+    fun updateByPosition(position: Int) {
         picture = repository.all()[position]
     }
 
-    fun update(path: String) {
+    fun updateByPath(path: String) {
         picture = repository.all().first { it.path == path }
     }
 }

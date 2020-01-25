@@ -32,7 +32,7 @@ class ViewerFragment : Fragment() {
         binding?.vm = viewerViewModel
 
         val path = ViewerFragmentArgs.fromBundle(arguments as Bundle).path
-        viewerViewModel.update(path)
+        viewerViewModel.updateByPath(path)
 
         val viewPager = view.findViewById<ViewPager2>(R.id.viewpager)
         viewPager.adapter = object : FragmentStateAdapter(this) {
@@ -47,7 +47,7 @@ class ViewerFragment : Fragment() {
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                viewerViewModel.update(position)
+                viewerViewModel.updateByPosition(position)
             }
         })
         viewPager.setCurrentItem(viewerViewModel.getCurrentPicturePosition(), false)
