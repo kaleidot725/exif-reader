@@ -4,6 +4,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+repositories {
+    jcenter()
+}
+
+configurations {
+    ktlint
+}
+
 android {
     compileSdkVersion 28
     compileOptions {
@@ -36,6 +44,7 @@ android {
 }
 
 dependencies {
+    ktlint "com.pinterest:ktlint:0.35.0"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -56,4 +65,19 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation "com.mikepenz:aboutlibraries:6.1.1"
     implementation "com.github.hadilq.liveevent:liveevent:1.2.0"
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    main = "com.pinterest.ktlint.Main"
+    classpath = configurations.ktlint
+    args "src/**/*.kt"
+}
+check.dependsOn ktlint
+
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    main = "com.pinterest.ktlint.Main"
+    classpath = configurations.ktlint
+    args "-F", "src/**/*.kt"
 }
