@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coil.ImageLoader
-import kaleidot725.exifreader.data.PictureRepository
+import kaleidot725.exifreader.repository.PictureRepository
 import kotlinx.coroutines.launch
 
 class ViewerItemViewModel(

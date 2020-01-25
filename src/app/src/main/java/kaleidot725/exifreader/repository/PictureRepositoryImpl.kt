@@ -1,12 +1,14 @@
-package kaleidot725.exifreader.data
+package kaleidot725.exifreader.repository
 
 import android.content.Context
 import android.provider.MediaStore
 import android.util.Log
+import kaleidot725.exifreader.data.Picture
 
-class PictureRepositoryImpl(private val context: Context) : PictureRepository {
+class PictureRepositoryImpl(private val context: Context) :
+    PictureRepository {
     private val list: MutableList<Picture> = mutableListOf()
-    
+
     override fun load() {
         list.addAll(update())
     }

@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kaleidot725.exifreader.data.PictureRepository
+import kaleidot725.exifreader.repository.PictureRepository
 import kotlinx.coroutines.launch
 
-class MetadataViewModel(private val repository : PictureRepository) : ViewModel() {
-    private val _vms : MutableLiveData<List<MetadataItemViewModel>> = MutableLiveData()
-    val vms : LiveData<List<MetadataItemViewModel>> = _vms
+class MetadataViewModel(private val repository: PictureRepository) : ViewModel() {
+    private val _vms: MutableLiveData<List<MetadataItemViewModel>> = MutableLiveData()
+    val vms: LiveData<List<MetadataItemViewModel>> = _vms
 
     fun load(path: String) {
         viewModelScope.launch {

@@ -1,8 +1,8 @@
 package kaleidot725.exifreader
 
 import coil.ImageLoader
-import kaleidot725.exifreader.data.PictureRepository
-import kaleidot725.exifreader.data.PictureRepositoryImpl
+import kaleidot725.exifreader.repository.PictureRepository
+import kaleidot725.exifreader.repository.PictureRepositoryImpl
 import kaleidot725.exifreader.ui.home.HomeViewModel
 import kaleidot725.exifreader.ui.metadata.MetadataViewModel
 import kaleidot725.exifreader.ui.viewer.ViewerItemViewModel
