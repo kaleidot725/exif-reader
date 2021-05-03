@@ -28,8 +28,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private fun setupVariable() {
         recyclerAdapter = PictureAdapter(viewLifecycleOwner).apply {
             onClick = { picture ->
-                val action =
-                    kaleidot725.exifreader.ui.home.HomeFragmentDirections.actionHomeFragmentToViewerFragment(picture.path)
+                val action = HomeFragmentDirections.actionHomeFragmentToViewerFragment(picture.path)
                 navController.navigate(action)
             }
         }

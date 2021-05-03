@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             androidContext(applicationContext)
             modules(appModule)
             Coil.setDefaultImageLoader(ImageLoader(applicationContext) {
+                availableMemoryPercentage(0.25)
                 crossfade(10)
             })
         }

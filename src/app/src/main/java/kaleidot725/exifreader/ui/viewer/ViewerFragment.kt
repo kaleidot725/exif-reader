@@ -32,7 +32,7 @@ class ViewerFragment : Fragment(R.layout.viewer_fragment) {
         path = ViewerFragmentArgs.fromBundle(arguments as Bundle).path
         viewPagerAdapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {
-                return viewerViewModel.getCount()
+                return viewerViewModel.getCurrentPictureCount()
             }
 
             override fun createFragment(position: Int): Fragment {
@@ -50,7 +50,7 @@ class ViewerFragment : Fragment(R.layout.viewer_fragment) {
                     viewerViewModel.updateByPosition(position)
                 }
             })
-            setCurrentItem(viewerViewModel.getCurrentPicturePosition(), false)
+            setCurrentItem(viewerViewModel.getCurrentPictureIndex(), false)
         }
         binding.floatingButton.setOnClickListener {
             val picture = viewerViewModel.getCurrentPicture()
@@ -61,5 +61,8 @@ class ViewerFragment : Fragment(R.layout.viewer_fragment) {
 
     private fun setupObserver() {
         viewerViewModel.updateByPath(path)
+        viewerViewModel.index.observe(viewLifecycleOwner) {
+            binding.viewpager.setCurrentItem(it, false)
+        }
     }
 }

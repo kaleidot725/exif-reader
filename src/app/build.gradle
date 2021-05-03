@@ -77,6 +77,8 @@ dependencies {
     implementation "com.mikepenz:aboutlibraries:6.1.1"
 
     implementation "com.github.hadilq.liveevent:liveevent:1.2.0"
+
+    implementation "androidx.exifinterface:exifinterface:1.3.2"
 }
 
 task ktlint(type: JavaExec, group: "verification") {

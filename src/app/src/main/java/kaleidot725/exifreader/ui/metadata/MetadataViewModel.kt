@@ -1,5 +1,6 @@
 package kaleidot725.exifreader.ui.metadata
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,8 +15,14 @@ class MetadataViewModel(private val repository: PictureRepository) : ViewModel()
 
     fun load(path: String) {
         viewModelScope.launch {
-            val picture = repository.get(path) ?: return@launch
-            _metas.postValue(picture.getMetadata())
+            try {
+                val picture = repository.getByPath(path) ?: return@launch
+                val metadataList = repository.getMetadata(picture) ?: return@launch
+                _metas.postValue(metadataList)
+            } catch (e: Exception) {
+                // FIXME
+                Log.e("MedatadataViewModel", e.toString())
+            }
         }
     }
 }
