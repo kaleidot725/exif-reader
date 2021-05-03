@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item?.itemId) {
+        when (item.itemId) {
             R.id.privacy_policy -> {
                 navController.navigate(R.id.action_homeFragment_to_privacyPolicyFragment)
             }

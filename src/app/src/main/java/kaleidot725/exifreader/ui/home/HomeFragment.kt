@@ -1,47 +1,53 @@
 package kaleidot725.exifreader.ui.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.exifreader.R
 import kaleidot725.exifreader.databinding.HomeFragmentBinding
+import kaleidot725.exifreader.extention.dataBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class HomeFragment : Fragment() {
-    private val homeViewModel: HomeViewModel by viewModel()
+class HomeFragment : Fragment(R.layout.home_fragment) {
     private val navController: NavController get() = findNavController()
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        homeViewModel.getAllPictures()
-        return DataBindingUtil.inflate<HomeFragmentBinding>(inflater, R.layout.home_fragment, container, false).apply {
-            vm = homeViewModel
-            lifecycleOwner = viewLifecycleOwner
-        }.root
-    }
+    private val homeViewModel: HomeViewModel by viewModel()
+    private val _binding: HomeFragmentBinding? by dataBinding()
+    private val binding: HomeFragmentBinding get() = _binding!!
+    private lateinit var recyclerAdapter: PictureAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupVariable()
+        setupView()
+        setupObserver()
+    }
 
-        val recyclerView = this.view?.findViewById<RecyclerView>(R.id.picture_recycler_view)
-        val recyclerAdapter = PictureAdapter(this)
-        recyclerView?.adapter = recyclerAdapter
-        recyclerView?.layoutManager = GridLayoutManager(context, 3)
-        recyclerView?.setHasFixedSize(true)
-        recyclerAdapter.onClick = { picture ->
-            val action = HomeFragmentDirections.actionHomeFragmentToViewerFragment(picture.path)
-            navController.navigate(action)
+    private fun setupVariable() {
+        recyclerAdapter = PictureAdapter(viewLifecycleOwner).apply {
+            onClick = { picture ->
+                val action =
+                    kaleidot725.exifreader.ui.home.HomeFragmentDirections.actionHomeFragmentToViewerFragment(picture.path)
+                navController.navigate(action)
+            }
         }
+    }
 
-        homeViewModel.pictures.observe(this, Observer {
+    private fun setupView() {
+        binding.vm = homeViewModel
+        binding.pictureRecyclerView.apply {
+            this.adapter = recyclerAdapter
+            this.layoutManager = GridLayoutManager(context, 3)
+            this.setHasFixedSize(true)
+        }
+    }
+
+    private fun setupObserver() {
+        homeViewModel.pictures.observe(viewLifecycleOwner) {
             recyclerAdapter.update(it)
-        })
+        }
+        homeViewModel.refresh()
     }
 }
