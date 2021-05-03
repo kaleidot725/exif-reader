@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.exifreader.R
@@ -38,6 +37,8 @@ class MetadataFragment : Fragment() {
         recyclerView?.adapter = recyclerAdapter
         recyclerView?.layoutManager = LinearLayoutManager(context)
         recyclerView?.setHasFixedSize(true)
-        viewModel.metas.observe(this, Observer { recyclerAdapter.update(it) })
+        viewModel.metas.observe(viewLifecycleOwner) {
+            recyclerAdapter.update(it)
+        }
     }
 }
