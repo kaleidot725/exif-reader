@@ -1,29 +1,36 @@
 package kaleidot725.exifreader.ui.viewer
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import kaleidot725.exifreader.R
 import kaleidot725.exifreader.databinding.ViewerItemFragmentBinding
+import kaleidot725.exifreader.extention.dataBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class ViewerItemFragment : Fragment() {
+class ViewerItemFragment : Fragment(R.layout.viewer_item_fragment) {
     private val viewerItemViewModel: ViewerItemViewModel by viewModel()
+    private val _binding: ViewerItemFragmentBinding? by dataBinding()
+    private val binding: ViewerItemFragmentBinding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.viewer_item_fragment, container, false)
-    }
+    private var position: Int = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = DataBindingUtil.bind<ViewerItemFragmentBinding>(this.view as View)
-        binding?.lifecycleOwner = this
-        binding?.vm = viewerItemViewModel
+        setupVariable()
+        setupView()
+        setupObserver()
+    }
 
-        val position = arguments?.getInt("position") ?: 0
+    private fun setupVariable() {
+        position = arguments?.getInt("position") ?: 0
+    }
+
+    private fun setupView() {
+        binding.vm = viewerItemViewModel
+    }
+
+    private fun setupObserver() {
         viewerItemViewModel.updatePosition(position)
     }
 

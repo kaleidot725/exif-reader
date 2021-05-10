@@ -1,22 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
-        <variable name="vm" type="kaleidot725.exifreader.ui.metadata.MetadataViewModel" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="kaleidot725.exifreader.ui.metadata.MetadataViewModel" />
     </data>
 
-    <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
-        android:background="@android:color/black"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/black"
         tools:context=".ui.metadata.MetadataFragment">
+
+        <EditText
+            android:id="@+id/search_view"
+            style="@style/CustomSearchView"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_margin="4dp"
+            android:background="#555555"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:hint="@string/search_metadata"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@id/metadata_recycler_view"
+            app:layout_constraintEnd_toStartOf="@id/search_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/search_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="4dp"
+            android:background="#555555"
+            android:foreground="?android:selectableItemBackground"
+            android:src="@drawable/details"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/metadata_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </FrameLayout>
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/not_found_metadata"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:visibility="@{vm.notFoundMetas ? View.VISIBLE : View.GONE}"
+            app:layout_constraintStart_toStartOf="@id/metadata_recycler_view"
+            app:layout_constraintEnd_toEndOf="@id/metadata_recycler_view"
+            app:layout_constraintTop_toTopOf="@id/metadata_recycler_view"
+            app:layout_constraintBottom_toBottomOf="@id/metadata_recycler_view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

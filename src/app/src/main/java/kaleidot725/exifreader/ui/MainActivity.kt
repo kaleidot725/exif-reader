@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
         val permission = Manifest.permission.READ_EXTERNAL_STORAGE
         if (!EasyPermissions.hasPermissions(this, permission)) {
@@ -39,7 +40,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             return
         }
 
-        setContentView(R.layout.activity_main)
         navController = findNavController(R.id.nav_host_fragment)
         navController.addOnDestinationChangedListener(destinationChangedListener)
         setupActionBarWithNavController(this, navController)
@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             androidContext(applicationContext)
             modules(appModule)
             Coil.setDefaultImageLoader(ImageLoader(applicationContext) {
+                availableMemoryPercentage(0.25)
                 crossfade(10)
             })
         }
@@ -62,8 +63,8 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.privacy_policy -> {
                 navController.navigate(R.id.action_homeFragment_to_privacyPolicyFragment)
             }

@@ -4,13 +4,12 @@ import android.net.Uri
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import coil.api.load
-import java.io.File
 
-@BindingAdapter("app:imageUrl")
-fun loadImage(view: ImageView, imagePath: String?) {
-    if (imagePath == null) {
+@BindingAdapter("app:imageUri")
+fun loadImage(view: ImageView, uri: Uri?) {
+    if (uri == null) {
         return
     }
 
-    view.load(Uri.fromFile(File(imagePath)))
+    view.load(uri)
 }
