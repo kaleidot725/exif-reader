@@ -6,8 +6,6 @@
 
 ExifReader is open source, read metadata from picture.
 
-![Exif-Reader](./Exif-Reader.png)
-
 # Features
 
 - display picture gallery.
