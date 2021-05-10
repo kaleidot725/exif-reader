@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <data>
-        <variable name="vm" type="kaleidot725.exifreader.ui.home.HomeViewModel" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="kaleidot725.exifreader.ui.home.HomeViewModel" />
     </data>
 
-    <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/home"
-        android:background="@android:color/black"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/black"
         tools:context=".ui.home.HomeFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/picture_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"/>
+            android:orientation="vertical" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/not_found_picture"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:visibility="@{vm.notFoundPicture ? View.VISIBLE : View.GONE}" />
     </FrameLayout>
 </layout>
