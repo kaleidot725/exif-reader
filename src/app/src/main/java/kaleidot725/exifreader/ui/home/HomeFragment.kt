@@ -1,5 +1,6 @@
 package kaleidot725.exifreader.ui.home
 
+import android.Manifest
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -10,8 +11,9 @@ import kaleidot725.exifreader.R
 import kaleidot725.exifreader.databinding.HomeFragmentBinding
 import kaleidot725.exifreader.extention.dataBinding
 import org.koin.android.viewmodel.ext.android.viewModel
+import pub.devrel.easypermissions.EasyPermissions
 
-class HomeFragment : Fragment(R.layout.home_fragment) {
+class HomeFragment : Fragment(R.layout.home_fragment), EasyPermissions.PermissionCallbacks {
     private val navController: NavController get() = findNavController()
     private val homeViewModel: HomeViewModel by viewModel()
     private val _binding: HomeFragmentBinding? by dataBinding()
@@ -23,6 +25,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         setupVariable()
         setupView()
         setupObserver()
+        checkPermission()
     }
 
     private fun setupVariable() {
@@ -47,6 +50,32 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         homeViewModel.pictures.observe(viewLifecycleOwner) {
             recyclerAdapter.update(it)
         }
-        homeViewModel.refresh()
+    }
+
+    private fun checkPermission() {
+        val permission = Manifest.permission.READ_EXTERNAL_STORAGE
+        if (!EasyPermissions.hasPermissions(requireContext(), permission)) {
+            EasyPermissions.requestPermissions(
+                this,
+                "This Application Access External Storage. Are you OK",
+                0,
+                permission
+            )
+        } else {
+            homeViewModel.updateAccessible(true)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, list: List<String>) {
+        homeViewModel.updateAccessible(true)
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, list: List<String>) {
+        homeViewModel.updateAccessible(false)
     }
 }

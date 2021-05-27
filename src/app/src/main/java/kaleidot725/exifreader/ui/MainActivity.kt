@@ -1,6 +1,5 @@
 package kaleidot725.exifreader.ui
 
-import android.Manifest
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -19,26 +18,14 @@ import kaleidot725.exifreader.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import pub.devrel.easypermissions.EasyPermissions
 
-class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
+class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private var menuItem: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val permission = Manifest.permission.READ_EXTERNAL_STORAGE
-        if (!EasyPermissions.hasPermissions(this, permission)) {
-            EasyPermissions.requestPermissions(
-                this,
-                "This Application Access External Storage. Are you OK",
-                0,
-                permission
-            )
-            return
-        }
 
         navController = findNavController(R.id.nav_host_fragment)
         navController.addOnDestinationChangedListener(destinationChangedListener)
@@ -86,17 +73,4 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     }
 
     override fun onSupportNavigateUp(): Boolean = findNavController(R.id.nav_host_fragment).navigateUp()
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
-    }
-
-    override fun onPermissionsGranted(requestCode: Int, list: List<String>) {
-        recreate()
-    }
-
-    override fun onPermissionsDenied(requestCode: Int, list: List<String>) {
-        finish()
-    }
 }

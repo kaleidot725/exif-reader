@@ -14,7 +14,7 @@ class PictureRepositoryImpl(private val context: Context) :
     private val allPicture: MutableList<Picture> = mutableListOf()
 
     override fun load() {
-        val newAllPicture = fetchALlPicture()
+        val newAllPicture = fetchAllPicture()
         allPicture.addAll(newAllPicture)
     }
 
@@ -63,7 +63,7 @@ class PictureRepositoryImpl(private val context: Context) :
         )
     }
 
-    private fun fetchALlPicture(): List<Picture> {
+    private fun fetchAllPicture(): List<Picture> {
         val pictures = ArrayList<Picture>()
         val cursor = createCursor()
         cursor?.use {
